@@ -31,6 +31,6 @@ namespace floah
         // Generate.
         ////////////////////////////////////////////////////////////////
 
-        [[nodiscard]] virtual sol::FlatMesh& generate(sol::MeshManager& meshManager) = 0;
+        [[nodiscard]] virtual sol::IMesh& generate(sol::MeshManager& meshManager) = 0;
     };
 }  // namespace floah
