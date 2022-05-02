@@ -1,3 +1,5 @@
+find_package(freetype REQUIRED)
+find_package(icu REQUIRED)
 find_package(math REQUIRED)
 find_package(sol REQUIRED COMPONENTS core luna)
 
@@ -10,6 +12,7 @@ set(INCLUDE_DIR "include/floah-viz")
 set(SRC_DIR "src")
 
 set(HEADERS
+    ${INCLUDE_DIR}/font_map.h
     ${INCLUDE_DIR}/vertex.h
 
     ${INCLUDE_DIR}/generators/circle_generator.h
@@ -18,6 +21,8 @@ set(HEADERS
 )
 
 set(SOURCES
+    ${SRC_DIR}/font_map.cpp
+
     ${SRC_DIR}/generators/circle_generator.cpp
     ${SRC_DIR}/generators/rectangle_generator.cpp
 )
@@ -30,7 +35,8 @@ set(DEPS_PUBLIC
 )
 
 set(DEPS_PRIVATE
-
+    freetype
+    icu::icu
 )
 
 make_target(
