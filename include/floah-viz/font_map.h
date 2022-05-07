@@ -91,6 +91,18 @@ namespace floah
         [[nodiscard]] math::uint2 getFontSize() const noexcept;
 
         /**
+         * \brief Get the font ascender metric.
+         * \return Ascender.
+         */
+        [[nodiscard]] int32_t getFontAscender() const noexcept;
+
+        /**
+         * \brief Get the font descender metric.
+         * \return Descender.
+         */
+        [[nodiscard]] int32_t getFontDescender() const noexcept;
+
+        /**
          * \brief Get image object.
          * \return Image (or nullptr if image was not generated yet).
          */
@@ -121,6 +133,7 @@ namespace floah
 
         // TODO: Add support for updating FontMap? New characters, different font, font size, etc.
 
+
     private:
         ////////////////////////////////////////////////////////////////
         // Member variables.
@@ -140,6 +153,10 @@ namespace floah
          * \brief Font size.
          */
         math::uint2 size;
+
+        int32_t ascender  = 0;
+
+        int32_t descender = 0;
 
         /**
          * \brief Image.

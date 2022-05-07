@@ -18,6 +18,7 @@ set(HEADERS
     ${INCLUDE_DIR}/generators/circle_generator.h
     ${INCLUDE_DIR}/generators/generator.h
     ${INCLUDE_DIR}/generators/rectangle_generator.h
+    ${INCLUDE_DIR}/generators/text_generator.h
 )
 
 set(SOURCES
@@ -25,6 +26,7 @@ set(SOURCES
 
     ${SRC_DIR}/generators/circle_generator.cpp
     ${SRC_DIR}/generators/rectangle_generator.cpp
+    ${SRC_DIR}/generators/text_generator.cpp
 )
 
 set(DEPS_PUBLIC

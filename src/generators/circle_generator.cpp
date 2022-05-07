@@ -29,7 +29,7 @@ namespace floah
     // Generate.
     ////////////////////////////////////////////////////////////////
 
-    sol::IMesh& CircleGenerator::generate(sol::MeshManager& meshManager)
+    sol::IMesh& CircleGenerator::generate(Params& params)
     {
         // Circle will consist of an outer rim of quads and an inner triangle fan.
         std::vector<Vertex>   vertices(vertexCount * 3 + 1);
@@ -97,14 +97,14 @@ namespace floah
         indices[vertexCount * 9 - 1]       = vertexCount * 3;
 
         // We generate a description that contains all data, even if e.g. fill is disabled. Makes updating a lot easier.
-        auto desc = meshManager.createMeshDescription();
+        auto desc = params.meshManager.createMeshDescription();
         desc->addVertexBuffer(sizeof(Vertex), static_cast<uint32_t>(vertices.size()));
         desc->setVertexData(0, 0, vertices.size(), vertices.data());
         desc->addIndexBuffer(sizeof(uint32_t), static_cast<uint32_t>(indices.size()));
         desc->setIndexData(0, indices.size(), indices.data());
 
         // Create mesh and set indices based on fillMode.
-        auto& mesh = meshManager.createIndexedMesh(std::move(desc));
+        auto& mesh = params.meshManager.createIndexedMesh(std::move(desc));
         if (fillMode == FillMode::Outline) { mesh.setIndexCount(vertexCount * 6); }
         else if (fillMode == FillMode::Fill)
         {

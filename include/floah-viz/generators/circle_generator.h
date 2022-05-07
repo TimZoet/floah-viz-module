@@ -45,7 +45,7 @@ namespace floah
         // Generate.
         ////////////////////////////////////////////////////////////////
 
-        [[nodiscard]] sol::IMesh& generate(sol::MeshManager& meshManager) override;
+        [[nodiscard]] sol::IMesh& generate(Params& params) override;
 
         ////////////////////////////////////////////////////////////////
         // Member variables.

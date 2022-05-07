@@ -29,7 +29,7 @@ namespace floah
     // Generate.
     ////////////////////////////////////////////////////////////////
 
-    sol::IMesh& RectangleGenerator::generate(sol::MeshManager& meshManager)
+    sol::IMesh& RectangleGenerator::generate(Params& params)
     {
         const auto hMargin   = static_cast<float>(margin.get(static_cast<int32_t>(upper.x - lower.x)));
         const auto vMargin   = static_cast<float>(margin.get(static_cast<int32_t>(upper.y - lower.y)));
@@ -70,14 +70,14 @@ namespace floah
                                                       3, 7, 6, 0, 4, 7, 0, 7, 3, 4, 5, 7, 5, 6, 7};
 
         // We generate a description that contains all data, even if e.g. fill is disabled. Makes updating a lot easier.
-        auto desc = meshManager.createMeshDescription();
+        auto desc = params.meshManager.createMeshDescription();
         desc->addVertexBuffer(sizeof(Vertex), static_cast<uint32_t>(vertices.size()));
         desc->setVertexData(0, 0, vertices.size(), vertices.data());
         desc->addIndexBuffer(sizeof(uint32_t), static_cast<uint32_t>(indices.size()));
         desc->setIndexData(0, indices.size(), indices.data());
 
         // Create mesh and set indices based on fillMode.
-        auto& mesh = meshManager.createIndexedMesh(std::move(desc));
+        auto& mesh = params.meshManager.createIndexedMesh(std::move(desc));
         if (fillMode == FillMode::Outline) { mesh.setIndexCount(24); }
         else if (fillMode == FillMode::Fill)
         {

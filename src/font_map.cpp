@@ -40,7 +40,7 @@ namespace
             if (FT_Load_Char(face, chars.char32At(i), FT_LOAD_COMPUTE_METRICS)) continue;
 
             // Skip size 0 chars.
-            if (face->glyph->metrics.width == 0) continue;
+            if (face->glyph->metrics.width == 0 || face->glyph->metrics.height == 0) continue;
 
             sizes.emplace_back(face->glyph->metrics.width >> 6, face->glyph->metrics.height >> 6);
         }
@@ -100,8 +100,6 @@ namespace
             const auto uchar = chars.char32At(i);
             // TODO: What if loading fails?
             if (FT_Load_Char(face, uchar, FT_LOAD_RENDER)) continue;
-            if (face->glyph->bitmap.width == 0) continue;
-
 
             // Glyph does not fit on current row anymore. Reset and move to next row.
             if (x + face->glyph->bitmap.width >= image.getWidth())
@@ -112,7 +110,9 @@ namespace
             }
 
             // Copy bitmap.
-            image.setData(face->glyph->bitmap.buffer, {x, y}, {face->glyph->bitmap.width, face->glyph->bitmap.rows}, 0);
+            if (face->glyph->bitmap.width != 0 && face->glyph->bitmap.rows != 0)
+                image.setData(
+                  face->glyph->bitmap.buffer, {x, y}, {face->glyph->bitmap.width, face->glyph->bitmap.rows}, 0);
 
             // Store character.
             const auto size    = math::uint2(face->glyph->bitmap.width, face->glyph->bitmap.rows);
@@ -176,6 +176,10 @@ namespace floah
 
     math::uint2 FontMap::getFontSize() const noexcept { return size; }
 
+    int32_t FontMap::getFontAscender() const noexcept { return ascender; }
+
+    int32_t FontMap::getFontDescender() const noexcept { return descender; }
+
     sol::Image2D* FontMap::getImage() const noexcept { return image; }
 
     sol::Texture2D* FontMap::getTexture() const noexcept { return texture; }
@@ -211,6 +215,8 @@ namespace floah
         if (err) throw FloahError(std::format("Failed to load font file {}. Error code: {}", path.string(), err));
 
         FT_Set_Pixel_Sizes(face, size.x, size.y);
+        ascender  = face->ascender >> 6;
+        descender = face->descender >> 6;
 
         // Create image and texture object.
         const auto imageSize = calculateImageSize(face, ustr);

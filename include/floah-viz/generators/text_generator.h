@@ -15,31 +15,24 @@
 
 namespace floah
 {
-    class RectangleGenerator : public Generator
+    class TextGenerator : public Generator
     {
     public:
-        enum class FillMode
-        {
-            Outline = 1,
-            Fill    = 2,
-            Both    = 3
-        };
-
         ////////////////////////////////////////////////////////////////
         // Constructors.
         ////////////////////////////////////////////////////////////////
 
-        RectangleGenerator();
+        TextGenerator();
 
-        RectangleGenerator(const RectangleGenerator&) = delete;
+        TextGenerator(const TextGenerator&) = delete;
 
-        RectangleGenerator(RectangleGenerator&&) noexcept = delete;
+        TextGenerator(TextGenerator&&) noexcept = delete;
 
-        ~RectangleGenerator() noexcept override;
+        ~TextGenerator() noexcept override;
 
-        RectangleGenerator& operator=(const RectangleGenerator&) = delete;
+        TextGenerator& operator=(const TextGenerator&) = delete;
 
-        RectangleGenerator& operator=(RectangleGenerator&&) noexcept = delete;
+        TextGenerator& operator=(TextGenerator&&) noexcept = delete;
 
         ////////////////////////////////////////////////////////////////
         // Generate.
@@ -51,24 +44,8 @@ namespace floah
         // Member variables.
         ////////////////////////////////////////////////////////////////
 
-        /**
-         * \brief Lower bounds of the rectangle.
-         */
-        math::float2 lower;
+        std::string text;
 
-        /**
-         * \brief Upper bounds of the rectangle.
-         */
-        math::float2 upper;
-
-        /**
-         * \brief FillMode.
-         */
-        FillMode fillMode = FillMode::Both;
-
-        /**
-         * \brief Width of the outline.
-         */
-        Length margin;
+        math::float2 position;
     };
 }  // namespace floah
