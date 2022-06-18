@@ -18,7 +18,7 @@
 // Module includes.
 ////////////////////////////////////////////////////////////////
 
-#include "floah-layout/utils/floah_error.h"
+#include "floah-common/floah_error.h"
 #include "sol/texture/image2d.h"
 #include "sol/texture/texture_manager.h"
 

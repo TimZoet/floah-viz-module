@@ -30,6 +30,7 @@ set(SOURCES
 )
 
 set(DEPS_PUBLIC
+    floah-common
     floah-layout
     math::math
     sol::core
