@@ -13,6 +13,7 @@ set(SRC_DIR "src")
 
 set(HEADERS
     ${INCLUDE_DIR}/font_map.h
+    ${INCLUDE_DIR}/stylesheet.h
     ${INCLUDE_DIR}/vertex.h
 
     ${INCLUDE_DIR}/generators/circle_generator.h
@@ -23,6 +24,7 @@ set(HEADERS
 
 set(SOURCES
     ${SRC_DIR}/font_map.cpp
+    ${SRC_DIR}/stylesheet.cpp
 
     ${SRC_DIR}/generators/circle_generator.cpp
     ${SRC_DIR}/generators/rectangle_generator.cpp
