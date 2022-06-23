@@ -105,9 +105,9 @@ namespace floah
     [[nodiscard]] constexpr uint32_t hashParameter() noexcept
     {
 #if defined _MSC_VER
-        return hash(__FUNCSIG__); // NOLINT(clang-diagnostic-language-extension-token)
+        return hash(__FUNCSIG__);  // NOLINT(clang-diagnostic-language-extension-token)
 #elif defined __clang__ || (defined __GNUC__)
-        return hash(__PRETTY_FUNCTION__); // NOLINT(clang-diagnostic-language-extension-token)
+        return hash(__PRETTY_FUNCTION__);  // NOLINT(clang-diagnostic-language-extension-token)
 #endif
     }
 
@@ -174,6 +174,32 @@ namespace floah
         Stylesheet& operator=(Stylesheet&&) noexcept;
 
         ////////////////////////////////////////////////////////////////
+        // Getters.
+        ////////////////////////////////////////////////////////////////
+
+        /**
+         * \brief Get the parent stylesheet.
+         * \return Parent stylesheet or nullptr.
+         */
+        [[nodiscard]] Stylesheet* getParent() noexcept;
+
+        /**
+         * \brief Get the parent stylesheet.
+         * \return Parent stylesheet or nullptr.
+         */
+        [[nodiscard]] const Stylesheet* getParent() const noexcept;
+
+        ////////////////////////////////////////////////////////////////
+        // Setters.
+        ////////////////////////////////////////////////////////////////
+
+        /**
+         * \brief Set the parent stylesheet from which values will be retrieved if this stylesheet does not have it.
+         * \param stylesheet Parent or nullptr.
+         */
+        void setParent(Stylesheet* stylesheet) noexcept;
+
+        ////////////////////////////////////////////////////////////////
         // Access.
         ////////////////////////////////////////////////////////////////
 
@@ -207,12 +233,20 @@ namespace floah
             constexpr auto key = hashParameter<T>();
 
             auto it = maps.find(key);
-            if (it == maps.end()) return {};
+            if (it == maps.end())
+            {
+                if (parent) return parent->get<T>(name);
+                return {};
+            }
 
             const auto& map = static_cast<Map<T>&>(*it->second).map;
 
             auto it2 = map.find(name);
-            if (it2 == map.end()) return {};
+            if (it2 == map.end())
+            {
+                if (parent) return parent->get<T>(name);
+                return {};
+            }
 
             return it2->second;
         }
@@ -238,5 +272,7 @@ namespace floah
         ////////////////////////////////////////////////////////////////
 
         std::unordered_map<uint32_t, BaseMapPtr> maps;
+
+        Stylesheet* parent = nullptr;
     };
 }  // namespace floah

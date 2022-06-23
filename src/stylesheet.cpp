@@ -21,4 +21,19 @@ namespace floah
     }
 
     Stylesheet& Stylesheet::operator=(Stylesheet&&) noexcept = default;
+
+    ////////////////////////////////////////////////////////////////
+    // Getters.
+    ////////////////////////////////////////////////////////////////
+
+    Stylesheet* Stylesheet::getParent() noexcept { return parent; }
+
+    const Stylesheet* Stylesheet::getParent() const noexcept { return parent; }
+
+    ////////////////////////////////////////////////////////////////
+    // Setters.
+    ////////////////////////////////////////////////////////////////
+
+    void Stylesheet::setParent(Stylesheet* stylesheet) noexcept { parent = stylesheet; }
+
 }  // namespace floah
