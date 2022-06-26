@@ -10,7 +10,6 @@
 #include <string>
 #include <unordered_map>
 
-
 namespace floah
 {
     /**
@@ -227,7 +226,7 @@ namespace floah
          * \param name Value name.
          * \return Value or empty if it does not exist.
          */
-        template<std::copyable T>
+        template<typename T>
         [[nodiscard]] std::optional<T> get(const std::string& name) const
         {
             constexpr auto key = hashParameter<T>();
@@ -258,12 +257,12 @@ namespace floah
          * \param defaultValue Value to return if a value with the given name does not exist.
          * \return Value.
          */
-        template<std::copyable T>
-        [[nodiscard]] T get(const std::string& name, T&& defaultValue) const
+        template<typename T>
+        [[nodiscard]] T get(const std::string& name, T defaultValue) const
         {
             const auto val = get<T>(name);
             if (val) return *val;
-            return std::forward<T>(defaultValue);
+            return defaultValue;
         }
 
     private:
@@ -275,4 +274,6 @@ namespace floah
 
         Stylesheet* parent = nullptr;
     };
+
+    using StylesheetPtr=std::unique_ptr<Stylesheet>;
 }  // namespace floah

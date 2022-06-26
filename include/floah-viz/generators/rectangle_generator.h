@@ -70,5 +70,10 @@ namespace floah
          * \brief Width of the outline.
          */
         Length margin;
+
+        /**
+         * \brief Vertex color.
+         */
+        math::float4 color = {1, 1, 1, 1};
     };
 }  // namespace floah
