@@ -20,6 +20,10 @@ set(HEADERS
     ${INCLUDE_DIR}/generators/generator.h
     ${INCLUDE_DIR}/generators/rectangle_generator.h
     ${INCLUDE_DIR}/generators/text_generator.h
+
+    ${INCLUDE_DIR}/scenegraph/node.h
+    ${INCLUDE_DIR}/scenegraph/scenegraph_generator.h
+    ${INCLUDE_DIR}/scenegraph/transform_node.h
 )
 
 set(SOURCES

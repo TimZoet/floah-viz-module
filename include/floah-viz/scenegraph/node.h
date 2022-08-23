@@ -1,0 +1,36 @@
+#pragma once
+
+////////////////////////////////////////////////////////////////
+// Module includes.
+////////////////////////////////////////////////////////////////
+
+#include "sol/scenegraph/node.h"
+
+namespace floah
+{
+    class INode
+    {
+    public:
+        ////////////////////////////////////////////////////////////////
+        // Constructors.
+        ////////////////////////////////////////////////////////////////
+
+        INode() = default;
+
+        INode(const INode&) = default;
+
+        INode(INode&&) noexcept = default;
+
+        virtual ~INode() noexcept = default;
+
+        INode& operator=(const INode&) = default;
+
+        INode& operator=(INode&&) noexcept = default;
+
+        ////////////////////////////////////////////////////////////////
+        // Getters.
+        ////////////////////////////////////////////////////////////////
+
+        [[nodiscard]] virtual sol::Node& getAsNode() = 0;
+    };
+}  // namespace floah
