@@ -31,6 +31,8 @@ namespace floah
 
     sol::IMesh& RectangleGenerator::generate(Params& params)
     {
+        if (params.mesh) throw std::runtime_error("Update not yet implemented");
+
         const auto hMargin   = static_cast<float>(margin.get(static_cast<int32_t>(upper.x - lower.x)));
         const auto vMargin   = static_cast<float>(margin.get(static_cast<int32_t>(upper.y - lower.y)));
         const auto hUvMargin = hMargin / (upper.x - lower.x);

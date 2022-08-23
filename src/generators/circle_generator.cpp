@@ -31,6 +31,8 @@ namespace floah
 
     sol::IMesh& CircleGenerator::generate(Params& params)
     {
+        if (params.mesh) throw std::runtime_error("Update not yet implemented");
+
         // Circle will consist of an outer rim of quads and an inner triangle fan.
         std::vector<Vertex>   vertices(vertexCount * 3 + 1);
         std::vector<uint32_t> indices(vertexCount * 3 * 3, 0);

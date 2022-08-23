@@ -25,6 +25,11 @@ namespace floah
         {
             sol::MeshManager& meshManager;
             FontMap&          fontMap;
+
+            /**
+             * \brief If not null, update mesh instead of creating new one.
+             */
+            sol::IMesh* mesh = nullptr;
         };
 
         ////////////////////////////////////////////////////////////////

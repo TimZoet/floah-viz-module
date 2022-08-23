@@ -84,14 +84,22 @@ namespace floah
             offset.x += static_cast<float>(character.advance >> 6);
         }
 
-        // Create mesh.
+        // Create mesh description.
         auto desc = params.meshManager.createMeshDescription();
         desc->addVertexBuffer(sizeof(Vertex), static_cast<uint32_t>(vertices.size()));
         desc->setVertexData(0, 0, vertices.size(), vertices.data());
         desc->addIndexBuffer(sizeof(uint32_t), static_cast<uint32_t>(indices.size()));
         desc->setIndexData(0, indices.size(), indices.data());
-        auto& mesh = params.meshManager.createIndexedMesh(std::move(desc));
 
+        // Update mesh.
+        if (params.mesh)
+        {
+            params.mesh->update(std::move(desc));
+            return *params.mesh;
+        }
+
+        // Create new mesh.
+        auto& mesh = params.meshManager.createIndexedMesh(std::move(desc));
         return mesh;
     }
 }  // namespace floah
