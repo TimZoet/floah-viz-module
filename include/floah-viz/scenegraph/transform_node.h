@@ -39,5 +39,7 @@ namespace floah
         ////////////////////////////////////////////////////////////////
 
         virtual void setOffset(math::float3 offset) = 0;
+
+        virtual void setZ(float z) = 0;
     };
 }  // namespace floah
