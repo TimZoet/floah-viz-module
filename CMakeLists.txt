@@ -44,7 +44,7 @@ set(DEPS_PUBLIC
 )
 
 set(DEPS_PRIVATE
-    freetype
+    Freetype::Freetype
     icu::icu
 )
 
